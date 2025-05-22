@@ -1,0 +1,31 @@
+name: Reusable Rebase
+
+on:
+  workflow_call:
+    inputs:
+        from:
+            description: 'Branch to rebase from'
+            required: true
+            type: string
+        to:
+            description: 'Branch to rebase to'
+            required: true
+            type: string
+
+jobs:
+  rebase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.from_branch }}
+          fetch-depth: 0
+          ssh-key: ${{ secrets.KEY_SSH }}
+
+      - name: Rebase
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          git rebase ${{ inputs.to }}
+          git push origin HEAD:${{ inputs.from }} --force
