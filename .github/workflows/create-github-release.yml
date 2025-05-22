@@ -1,4 +1,4 @@
-name: Reusable Publish Release
+name: Create GitHub Release
 
 on:
   workflow_call:
