@@ -38,22 +38,13 @@ jobs:
       - name: Run Lint and try to auto-fix if possible
         id: lint_step
         run: |
-          echo "## 🔍 Code Analysis (Lint)" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-      
           if bun run lint; then
-            echo "- ✅ No lint errors detected." >> $GITHUB_STEP_SUMMARY
             echo "lint_status=clean" >> $GITHUB_OUTPUT
           else
-            echo "- ❌ Lint errors detected. Attempting automatic correction..." >> $GITHUB_STEP_SUMMARY
-      
             bun run fix-lint
-      
             if bun run lint; then
-                echo "- ✅ Automatic correction successful." >> $GITHUB_STEP_SUMMARY
               echo "lint_status=fixed" >> $GITHUB_OUTPUT
             else
-                echo "- ❌ Automatic correction failed. Errors remain." >> $GITHUB_STEP_SUMMARY
               echo "lint_status=failed" >> $GITHUB_OUTPUT
             fi
           fi
