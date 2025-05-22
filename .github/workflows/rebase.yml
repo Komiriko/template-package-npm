@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.from_branch }}
+          ref: ${{ inputs.from }}
           fetch-depth: 0
           ssh-key: ${{ secrets.KEY_SSH }}
 
