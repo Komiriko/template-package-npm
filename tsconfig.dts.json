@@ -20,13 +20,13 @@
     // Modules
     "allowArbitraryExtensions": true,
     "allowImportingTsExtensions": true, // This flag is only allowed when --noEmit or --emitDeclarationOnly is enabled
-    "module": "ESNext",
+    "module": "Preserve",
     "moduleResolution": "bundler",
     "moduleDetection": "force",
     "noUncheckedSideEffectImports": true,
     "paths": {
-      "#/root/*": ["./*"],
       "#/*": ["./source/*"],
+      "#/root/*": ["./*"],
     },
     "resolveJsonModule": true,
 
