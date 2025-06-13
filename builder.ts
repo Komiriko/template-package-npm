@@ -16,13 +16,13 @@ await Bun.build({
     external: [...dependencies, ...devDependencies, ...peerDependencies],
     root: './source',
     entrypoints: [
-        // Error
+        // # ————————— Error ————————— #
         './source/error/index.ts',
 
-        // Utils
+        // # ————————— Utils ————————— #
         './source/utils/index.ts',
-        './source/utils/enums/index.ts',
 
+        // # ————————— Root ————————— #
         './source/index.ts'
     ],
     outdir: './dist',
