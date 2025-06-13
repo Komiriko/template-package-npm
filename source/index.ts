@@ -1,5 +1,5 @@
-// Exports of error classes
-export * from './error';
+// # ————————— Error ————————— #
+export * from './error/pkgError';
 
-// Export utils
-export * from './utils';
+// # ————————— Utils ————————— #
+export * from './utils/foo';
