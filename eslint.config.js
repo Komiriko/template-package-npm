@@ -10,7 +10,7 @@ export default [
     {
         plugins: {
             '@stylistic': stylistic
-        },    
+        },
         languageOptions: {
             globals: {
                 ...globals.browser,
