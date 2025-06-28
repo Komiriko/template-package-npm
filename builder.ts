@@ -7,8 +7,7 @@ const peerDependencies: string[] = 'peerDependencies' in pkg ? Object.keys(pkg.p
 await Bun.$`rm -rf dist`;
 console.log('🗑️  Deleted dist folder if it existed. ✅');
 
-await Bun.$`tsc --project tsconfig.dts.json`;
-await Bun.$`tsc-alias -p tsconfig.dts.json`;
+await Bun.$`tsc --project tsconfig.build.json`;
 console.log('🔍 Type analysis and generation completed. ✅');
 
 await Bun.build({

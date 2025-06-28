@@ -11,7 +11,7 @@
   "scripts": {
     "build": "bun builder.ts",
     "dev": "bun --watch sandbox/index.ts",
-    "docs": "typedoc --tsconfig tsconfig.dts.json",
+    "docs": "typedoc --tsconfig tsconfig.build.json",
     "fix-lint": "eslint --fix ./source",
     "lint": "eslint ./source",
     "test:integration": "bun test $(find test/integration -name '*.spec.ts')",
