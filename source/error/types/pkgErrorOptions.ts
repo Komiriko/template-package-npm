@@ -4,23 +4,23 @@
  * @template TCause - The type of the cause of the error, which can be any object or error.
  */
 export interface PkgErrorOptions<TCause = unknown> {
-    /**
+	/**
      * The error message describing what went wrong.
      */
-    message?: string;
+	message?: string;
 
-    /**
+	/**
      * A unique key identifying the type of error, useful for localization or error handling.
      */
-    key?: string;
+	key?: string;
 
-    /**
+	/**
      * The HTTP status code associated with the error, typically used in API responses.
      */
-    httpStatusCode?: number;
+	httpStatusCode?: number;
 
-    /**
+	/**
      * The cause of the error, which can be an original error or additional context.
      */
-    cause?: TCause;
+	cause?: TCause;
 }
