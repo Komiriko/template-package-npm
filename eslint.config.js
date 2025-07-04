@@ -10,7 +10,7 @@ export default [
     {
         plugins: {
             '@stylistic': stylistic
-        },    
+        },
         languageOptions: {
             globals: {
                 ...globals.browser,
@@ -44,7 +44,7 @@ export default [
                 after: false
             }],
             '@stylistic/implicit-arrow-linebreak': ['error', 'beside'],
-            '@stylistic/indent': ['error', 4],
+            '@stylistic/indent': ['error', 'tab'],
             '@stylistic/indent-binary-ops': ['error', 4],
             '@stylistic/key-spacing': ['error', { beforeColon: false }],
             '@stylistic/keyword-spacing': ['error', { before: true }],
@@ -57,7 +57,7 @@ export default [
             '@stylistic/no-mixed-operators': 'error',
             '@stylistic/no-mixed-spaces-and-tabs': 'error',
             '@stylistic/no-multi-spaces': 'error',
-            '@stylistic/no-tabs': 'error',
+            '@stylistic/no-tabs': ['error', { allowIndentationTabs: true }],
             '@stylistic/no-trailing-spaces': 'error',
             '@stylistic/no-whitespace-before-property': 'error',
             '@stylistic/operator-linebreak': ['error', 'before'],

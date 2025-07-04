@@ -30,4 +30,4 @@ test/
 # === Core project files ===
 README.md
 tsconfig.json
-tsconfig.dts.json
+tsconfig.build.json
