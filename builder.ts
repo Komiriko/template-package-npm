@@ -12,30 +12,30 @@ await Bun.$`bunx tsc-alias -p tsconfig.build.json`;
 console.log('🔍 Type analysis and generation completed. ✅');
 
 await Bun.build({
-    target: 'bun',
-    external: [
-        ...dependencies,
-        ...devDependencies,
-        ...peerDependencies
-    ],
-    root: './source',
-    entrypoints: [
-        // # ————————— Error ————————— #
-        './source/error/index.ts',
-        './source/error/types/index.ts',
+	target: 'bun',
+	external: [
+		...dependencies,
+		...devDependencies,
+		...peerDependencies
+	],
+	root: './source',
+	entrypoints: [
+		// # ————————— Error ————————— #
+		'./source/error/index.ts',
+		'./source/error/types/index.ts',
 
-        // # ————————— Utils ————————— #
-        './source/utils/index.ts',
-        './source/utils/enums/index.ts',
+		// # ————————— Utils ————————— #
+		'./source/utils/index.ts',
+		'./source/utils/enums/index.ts',
 
-        // # ————————— Root ————————— #
-        './source/index.ts'
-    ],
-    outdir: './dist',
-    splitting: true,
-    format: 'esm',
-    minify: false,
-    sourcemap: 'none'
+		// # ————————— Root ————————— #
+		'./source/index.ts'
+	],
+	outdir: './dist',
+	splitting: true,
+	format: 'esm',
+	minify: false,
+	sourcemap: 'none'
 });
 console.log('🎉 Build completed successfully! 🎉');
 
