@@ -11,7 +11,7 @@
   "scripts": {
     "build": "bun builder.ts",
     "dev": "bun --watch sandbox/index.ts",
-    "docs": "typedoc --tsconfig tsconfig.build.json",
+    "docs": "bunx typedoc --tsconfig tsconfig.build.json",
     "fix-lint": "eslint --fix ./source",
     "lint": "eslint ./source",
     "test:integration": "bun test $(find test/integration -name '*.spec.ts')",
@@ -24,7 +24,7 @@
     "@types/bun": "^1.2.18",
     "eslint": "^9.30.1",
     "globals": "^16.3.0",
-    "typescript-eslint": "^8.35.1",
+    "typescript-eslint": "^8.36.0",
     "typescript": "^5.8.3"
   },
   "exports": {
