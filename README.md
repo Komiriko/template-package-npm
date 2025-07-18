@@ -8,52 +8,52 @@
 Generated SSH key with `ssh-keygen -t ed25519 -C "your_mail@domain.ext" -f your_package_name`
 
 - Get the public key with:
-  ```bash
-  cat your_package_name.pub
-  ```
-  You will get an output like this:
-  ```
-  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC ...
-  ```
+	```bash
+	cat your_package_name.pub
+	```
+	You will get an output like this:
+	```
+	ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC ...
+	```
 
 - Get the private key with:
-  ```bash
-  cat your_package_name
-  ```
-  You will get an output like this:
-  ```
-  -----BEGIN OPENSSH PRIVATE KEY-----
-  ...
-  -----END OPENSSH PRIVATE KEY-----
-  ```
+	```bash
+	cat your_package_name
+	```
+	You will get an output like this:
+	```
+	-----BEGIN OPENSSH PRIVATE KEY-----
+	...
+	-----END OPENSSH PRIVATE KEY-----
+	```
 
 #### 1.1.2 GPG **(You can reuse your existing GPG key if you have one for you account)**
 
 - Generate a GPG key with `gpg --full-generate-key` and follow the prompts to create a key suitable for signing commits and tags **whithout passphrase**.
 
 - Get the public key with:
-  ```bash
-    gpg --armor --export your_email@domain.ext
-  ```
-  
-  You will get an output like this:
-  ```
-  -----BEGIN PGP PUBLIC KEY BLOCK-----
-  ...
-  -----END PGP PUBLIC KEY BLOCK-----
-  ```
-  And then copy the output and put in yourh github account settings -> SSH and GPG keys -> New GPG key.
+	```bash
+		gpg --armor --export your_email@domain.ext
+	```
+	
+	You will get an output like this:
+	```
+	-----BEGIN PGP PUBLIC KEY BLOCK-----
+	...
+	-----END PGP PUBLIC KEY BLOCK-----
+	```
+	And then copy the output and put in yourh github account settings -> SSH and GPG keys -> New GPG key.
 
 - Get the private key (for github-action) with:
-  ```bash
-  gpg --armor --export-secret-keys your_email@domain.ext
-  ```
-  You will get an output like this:
-  ```
-  -----BEGIN PGP PRIVATE KEY BLOCK-----
-  ...
-  -----END PGP PRIVATE KEY BLOCK-----
-  ```
+	```bash
+	gpg --armor --export-secret-keys your_email@domain.ext
+	```
+	You will get an output like this:
+	```
+	-----BEGIN PGP PRIVATE KEY BLOCK-----
+	...
+	-----END PGP PRIVATE KEY BLOCK-----
+	```
 
 ### 1.2 Deploy keys
 Create a deploy key in your repository example `SSH_KEY` and put the public key generated in step [1.1.1](#111-ssh).
@@ -81,12 +81,12 @@ Update :
 - `description`: A brief description of your package.
 - `keywords`: Add relevant keywords to help others find your package. (e.g., `["bun", "package-template"]`)
 - `exports`: Define the entry points for your package. For example:
-  ```json
-  "exports": {
-    ".": "./dist/index.js",
-    "./types": "./dist/types/index.js"
-  }
-  ```
+	```json
+	"exports": {
+		".": "./dist/index.js",
+		"./types": "./dist/types/index.js"
+	}
+	```
 
 ## 4 Configure your builder
 Just change `entrypoints` in `builder.ts` to your entry point file. (e.g., `source/index.ts`).
@@ -103,13 +103,13 @@ Update the README.md file with relevant information about your package.
 ## 📌 Table of Contents
 
 - [📦 Package Template](#-package-template)
-  - [📌 Table of Contents](#-table-of-contents)
-  - [📝 Description](#-description)
-  - [🌟 Documentation](#-documentation)
-  - [🔧 Installation](#-installation)
-  - [⚙️ Usage](#-usage)
-  - [⚖️ License](#-license)
-  - [📧 Contact](#-contact)
+	- [📌 Table of Contents](#-table-of-contents)
+	- [📝 Description](#-description)
+	- [🌟 Documentation](#-documentation)
+	- [🔧 Installation](#-installation)
+	- [⚙️ Usage](#-usage)
+	- [⚖️ License](#-license)
+	- [📧 Contact](#-contact)
 
 ## 📝 Description
 
@@ -120,7 +120,7 @@ Update the README.md file with relevant information about your package.
 ## 🌟 Documentation
 
 - [References](https://your-package-docs.com)  
-  *(Update this link to your package documentation if needed.)*
+	*(Update this link to your package documentation if needed.)*
 
 ## 🔧 Installation
 
