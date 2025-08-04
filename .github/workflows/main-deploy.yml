@@ -1,5 +1,5 @@
-name: Deploy
-run-name: Deploy to "${{ github.ref_name }}" by "${{ github.actor }}"
+name: main-deploy
+run-name: '[main-deploy] - Deploy to "${{ github.ref_name }}" by "${{ github.actor }}"'
 
 on:
   push:

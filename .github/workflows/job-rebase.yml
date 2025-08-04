@@ -1,4 +1,5 @@
-name: Rebase
+name: job-rebase
+run-name: '[job-rebase] ${{ inputs.from }} -> ${{ inputs.to }}
 
 on:
   workflow_call:
