@@ -1,5 +1,5 @@
 name: job-create-github-release
-run-name: '[job-create-github-release] ${{ inputs.branch }} - ${{ inputs.versionSuffix || "stable" }} - ${{ inputs.isPrerelease }}'
+run-name: "[job-create-github-release] ${{ inputs.branch }} - ${{ inputs.versionSuffix || 'stable' }} - ${{ inputs.isPrerelease }}"
 
 on:
   workflow_call:

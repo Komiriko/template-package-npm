@@ -1,5 +1,5 @@
 name: job-lint
-run-name: '[job-lint] ${{ inputs.branch }}'
+run-name: "[job-lint] ${{ inputs.branch }}"
 
 on:
   workflow_call:

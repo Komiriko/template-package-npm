@@ -1,5 +1,5 @@
 name: job-publish-npm
-run-name: '[job-publish-npm] ${{ inputs.branch }} - ${{ inputs.npmTag }}'
+run-name: "[job-publish-npm] ${{ inputs.branch }} - ${{ inputs.npmTag }}"
 
 on:
   workflow_call:
