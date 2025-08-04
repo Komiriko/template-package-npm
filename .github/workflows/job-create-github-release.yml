@@ -149,35 +149,10 @@ jobs:
       - name: Extract Changelog additions
         id: changelog_diff
         run: |
-          # Extract the changelog content from the last commit (from changelogen)
-          if git log -1 --name-only | grep -q "CHANGELOG.md"; then
-            # If CHANGELOG.md was modified in the last commit, get the diff
-            PREV_COMMIT=$(git log -1 --pretty=%P | awk '{print $1}')
-            if [ -n "$PREV_COMMIT" ]; then
-              git diff ${PREV_COMMIT} HEAD --unified=0 CHANGELOG.md | grep '^+' | grep -v '++' | sed 's/^+//' > temp.md
-            else
-              # First commit, use the entire changelog
-              cat CHANGELOG.md > temp.md
-            fi
-          else
-            # Fallback: use a simple message
-            echo "Release ${{ steps.latest_tag.outputs.tag_name }}" > temp.md
-          fi
-          
-          # Ensure the file exists and has content
-          if [ ! -s temp.md ]; then
-            echo "Release ${{ steps.latest_tag.outputs.tag_name }}" > temp.md
-          fi
-          
-          echo "Changelog additions:"
+          PREV_COMMIT=$(git log -1 --pretty=%P | awk '{print $1}')
+          git diff ${PREV_COMMIT} HEAD --unified=0 CHANGELOG.md | grep '^+' | grep -v '++' | sed 's/^+//' > temp.md
+          echo "Changelog additions between previous and current commit:"
           cat temp.md
-          
-          # Set the output for the changelog
-          {
-            echo 'changelog<<EOF'
-            cat temp.md
-            echo EOF
-          } >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         env:
@@ -188,7 +163,8 @@ jobs:
             gh release create "${{ steps.latest_tag.outputs.tag_name }}" \
               --title "Release ${{ steps.latest_tag.outputs.tag_name }}" \
               --notes "$(cat temp.md)" \
-              --prerelease
+              --prerelease \
+              --latest
           else
             gh release create "${{ steps.latest_tag.outputs.tag_name }}" \
               --title "Release ${{ steps.latest_tag.outputs.tag_name }}" \
