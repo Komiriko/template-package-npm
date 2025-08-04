@@ -17,8 +17,8 @@ on:
         required: true
 
 jobs:
-  lint:
-    name: Check Lint (try to auto-fix if possible)
+  check-lint:
+    name: Lint & Auto-fix
     runs-on: ubuntu-latest
     steps:
       - name: Verify required secrets

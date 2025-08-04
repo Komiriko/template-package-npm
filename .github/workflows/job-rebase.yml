@@ -29,7 +29,8 @@ on:
         type: string
 
 jobs:
-  rebase:
+  rebase-branches:
+    name: Rebase Branches
     runs-on: ubuntu-latest
     steps:
       - name: Verify required secrets

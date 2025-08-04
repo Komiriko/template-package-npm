@@ -19,7 +19,7 @@ on:
         required: true
 
 jobs:
-  publish-npm:
+  publish-package:
     name: Publish to NPM
     runs-on: ubuntu-latest
     steps:

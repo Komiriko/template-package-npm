@@ -103,7 +103,7 @@ jobs:
     secrets:
       KEY_SSH: ${{ secrets.KEY_SSH }}
 
-  create-github-release:
+  create-release:
     needs:
       - unit-test
       - detect-context
@@ -120,7 +120,7 @@ jobs:
 
   publish-npm:
     needs:
-      - create-github-release
+      - create-release
       - detect-context
     uses: ./.github/workflows/job-publish-npm.yml
     with:
@@ -130,12 +130,12 @@ jobs:
       KEY_SSH: ${{ secrets.KEY_SSH }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-  doc:
+  docs:
     needs:
       - unit-test
       - detect-context
     if: needs.detect-context.outputs.branch == 'main' && needs.detect-context.outputs.isPrerelease == 'false'
-    name: Doc
+    name: Generate Documentation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -162,9 +162,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
 
-  rebase:
+  rebase-dev:
     needs:
-      - create-github-release
+      - create-release
       - detect-context
     if: needs.detect-context.outputs.rebaseDevToMain == 'true'
     uses: ./.github/workflows/job-rebase.yml
