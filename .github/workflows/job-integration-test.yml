@@ -1,4 +1,5 @@
-name: Integration Test
+name: job-integration-test
+run-name: '[job-integration-test] ${{ inputs.branch }}'
 
 on:
   workflow_call:
