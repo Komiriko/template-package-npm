@@ -75,7 +75,7 @@ jobs:
 
   lint:
     needs: detect-context
-    uses: ./.github/workflows/lint.yml
+    uses: ./.github/workflows/job-lint.yml
     with:
       branch: ${{ needs.detect-context.outputs.branch }}
     secrets:
@@ -87,7 +87,7 @@ jobs:
     needs: 
       - lint
       - detect-context
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/job-build.yml
     with:
       branch: ${{ needs.detect-context.outputs.branch }}
     secrets:
@@ -97,7 +97,7 @@ jobs:
     needs:
       - build
       - detect-context
-    uses: ./.github/workflows/unit-test.yml
+    uses: ./.github/workflows/job-unit-test.yml
     with:
       branch: ${{ needs.detect-context.outputs.branch }}
     secrets:
@@ -107,7 +107,7 @@ jobs:
     needs:
       - unit-test
       - detect-context
-    uses: ./.github/workflows/create-github-release.yml
+    uses: ./.github/workflows/job-create-github-release.yml
     with:
       branch: ${{ needs.detect-context.outputs.branch }}
       versionSuffix: ${{ needs.detect-context.outputs.versionSuffix }}
@@ -122,7 +122,7 @@ jobs:
     needs:
       - create-github-release
       - detect-context
-    uses: ./.github/workflows/publish-npm.yml
+    uses: ./.github/workflows/job-publish-npm.yml
     with:
       branch: ${{ needs.detect-context.outputs.branch }}
       npmTag: ${{ needs.detect-context.outputs.npmTag }}
@@ -167,7 +167,7 @@ jobs:
       - create-github-release
       - detect-context
     if: needs.detect-context.outputs.rebaseDevToMain == 'true'
-    uses: ./.github/workflows/rebase.yml
+    uses: ./.github/workflows/job-rebase.yml
     with:
       from: develop
       to: main
