@@ -27,18 +27,18 @@ on:
         required: true
     outputs:
       tag:
-        value: ${{ jobs.publish-release.outputs.tag }}
+        value: ${{ jobs.create-release.outputs.tag }}
         description: 'The tag name of the release'
       changelog:
-        value: ${{ jobs.publish-release.outputs.changelog }}
+        value: ${{ jobs.create-release.outputs.changelog }}
         description: 'The changelog generated for the release'
       isPrerelease:
-        value: ${{ jobs.publish-release.outputs.isPrerelease }}
+        value: ${{ jobs.create-release.outputs.isPrerelease }}
         description: 'Indicates if the release is a prerelease or not'
 
 jobs:
-  publish-release:
-    name: Publish Release
+  create-release:
+    name: Create Release
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.latest_tag.outputs.tag_name }}

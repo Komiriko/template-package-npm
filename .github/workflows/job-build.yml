@@ -13,8 +13,8 @@ on:
         required: true
 
 jobs:
-  build:
-    name: Check Build
+  check-build:
+    name: Build Package
     runs-on: ubuntu-latest
     steps:
       - name: Verify required secrets

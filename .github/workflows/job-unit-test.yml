@@ -13,8 +13,8 @@ on:
         required: true
 
 jobs:
-  unit-test:
-    name: Check unit tests
+  run-unit-tests:
+    name: Unit Tests
     runs-on: ubuntu-latest
     steps:
       - name: Verify required secrets

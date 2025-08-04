@@ -13,8 +13,8 @@ on:
         required: true
 
 jobs:
-  integration-test:
-    name: Check integration tests
+  run-integration-tests:
+    name: Integration Tests
     runs-on: ubuntu-latest
     steps:
       - name: Verify required secrets
