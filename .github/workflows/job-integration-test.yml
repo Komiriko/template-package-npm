@@ -1,4 +1,4 @@
-name: Build
+name: Integration Test
 
 on:
   workflow_call:
@@ -12,10 +12,19 @@ on:
         required: true
 
 jobs:
-  build:
-    name: Check Build
+  integration-test:
+    name: Check integration tests
     runs-on: ubuntu-latest
     steps:
+      - name: Verify required secrets
+        run: |
+          echo "🔍 Verifying required secrets for integration test job..."
+          if [ -z "${{ secrets.KEY_SSH }}" ]; then
+            echo "❌ KEY_SSH secret is missing"
+            exit 1
+          fi
+          echo "✅ All required secrets are present"
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -31,5 +40,6 @@ jobs:
       - name: Install Dependencies
         run: bun install
 
-      - name: Run Build
-        run: bun run build
+      - name: Run Integration Tests and update Summary
+        id: integration_test
+        run: bun run test:integration
