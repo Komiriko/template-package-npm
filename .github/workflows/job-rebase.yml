@@ -1,5 +1,5 @@
-name: job-rebase
-run-name: '[job-rebase] ${{ inputs.from }} -> ${{ inputs.to }}
+name: Rebase
+run-name: '[job-rebase] ${{ inputs.from }} -> ${{ inputs.to }}'
 
 on:
   workflow_call:
@@ -27,7 +27,6 @@ on:
         description: 'Branch to rebase to'
         required: true
         type: string
-
 
 jobs:
   rebase:
