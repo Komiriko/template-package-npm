@@ -1,5 +1,5 @@
 name: main-ci
-run-name: '[main-ci] - Check CI, run for "${{ github.head_ref || github.ref_name }}" by "${{ github.actor }}"'
+run-name: "[main-ci] Checker run for \"${{ github.head_ref || github.ref_name }}\" by \"${{ github.actor }}\""
 
 on:
   pull_request:

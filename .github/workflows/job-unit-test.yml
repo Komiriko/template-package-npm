@@ -1,5 +1,5 @@
 name: job-unit-test
-run-name: '[job-unit-test] ${{ inputs.branch }}'
+run-name: "[job-unit-test] ${{ inputs.branch }}"
 
 on:
   workflow_call:

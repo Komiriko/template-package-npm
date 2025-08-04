@@ -1,5 +1,5 @@
 name: job-build
-run-name: '[job-build] ${{ inputs.branch }}'
+run-name: "[job-build] ${{ inputs.branch }}"
 
 on:
   workflow_call:
