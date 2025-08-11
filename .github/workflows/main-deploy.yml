@@ -103,9 +103,20 @@ jobs:
     secrets:
       KEY_SSH: ${{ secrets.KEY_SSH }}
 
+  integration-test:
+    needs:
+      - build
+      - detect-context
+    uses: ./.github/workflows/job-integration-test.yml
+    with:
+      branch: ${{ needs.detect-context.outputs.branch }}
+    secrets:
+      KEY_SSH: ${{ secrets.KEY_SSH }}
+
   create-release:
     needs:
       - unit-test
+      - integration-test
       - detect-context
     uses: ./.github/workflows/job-create-github-release.yml
     with:
@@ -133,6 +144,7 @@ jobs:
   docs:
     needs:
       - unit-test
+      - integration-test
       - detect-context
     if: needs.detect-context.outputs.branch == 'main' && needs.detect-context.outputs.isPrerelease == 'false'
     name: Generate Documentation
