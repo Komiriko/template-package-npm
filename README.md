@@ -77,7 +77,6 @@ Add the following environment variables to your repository settings:
 ## 3 Configure your package.json
 Update :
 - `name`: The name of your package, e.g., `@your-scope/your-package-name` or `your-package-name`.
-- `version`: Reset to `1.0.0`. or the version you want to start with.
 - `description`: A brief description of your package.
 - `keywords`: Add relevant keywords to help others find your package. (e.g., `["bun", "package-template"]`)
 - `exports`: Define the entry points for your package. For example:
