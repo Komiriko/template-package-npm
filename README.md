@@ -75,17 +75,37 @@ Add the following environment variables to your repository settings:
 - Add your settings..
 
 ## 3 Configure your package.json
-Update :
-- `name`: The name of your package, e.g., `@your-scope/your-package-name` or `your-package-name`.
-- `description`: A brief description of your package.
-- `keywords`: Add relevant keywords to help others find your package. (e.g., `["bun", "package-template"]`)
-- `exports`: Define the entry points for your package. For example:
-	```json
-	"exports": {
-		".": "./dist/index.js",
-		"./types": "./dist/types/index.js"
-	}
-	```
+
+Run the interactive setup script to configure your package:
+
+```bash
+./npm-template-setup
+```
+
+This script will prompt you for:
+- **Package name**: e.g., `@your-scope/your-package-name` or `your-package-name`
+- **Description**: A brief description of your package
+- **Author name**: Your name
+- **License holder**: Usually the same as author name
+- **Contact email**: Your contact email (updates README, CODE_OF_CONDUCT, etc.)
+- **Keywords**: Comma-separated keywords to help others find your package
+
+The script automatically updates:
+- `package.json` with your package information
+- `LICENSE` file with current year and license holder
+- `CODE_OF_CONDUCT.md` with your contact email
+- `CONTRIBUTING.md` with your contact email
+- `README.md` template placeholders
+- GitHub issue templates
+
+After running the script, manually configure the `exports` field in `package.json` to define your package entry points:
+
+```json
+"exports": {
+	".": "./dist/index.js",
+	"./types": "./dist/types/index.js"
+}
+```
 
 ## 4 Configure your builder
 Just change `entrypoints` in `builder.ts` to your entry point file. (e.g., `source/index.ts`).
