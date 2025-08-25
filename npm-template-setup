@@ -192,20 +192,23 @@ update_package_json() {
 
 # Update package.json using jq
 update_package_json_with_jq() {
-	local repo_obj=""
+	local repo_obj="null"
 	if [[ -n "$REPO_URL" ]]; then
 		repo_obj="{\"type\": \"git\", \"url\": \"$REPO_URL.git\"}"
 	fi
 	
-	local cmd="jq --arg name \"$PACKAGE_NAME\" \\
-	   --arg desc \"$PACKAGE_DESCRIPTION\" \\
-	   --arg author \"$AUTHOR_NAME\" \\
-	   --argjson keywords \"$KEYWORDS_JSON\" \\
-	   --argjson repository \"$repo_obj\" \\
-	   '.name = \$name | (if \$desc != \"\" then .description = \$desc else . end) | .author = \$author | .keywords = \$keywords | if \$repository != \"\" then .repository = \$repository else . end' \\
-	   package.json > package.json.tmp && mv package.json.tmp package.json"
-	
-	execute_command "$cmd"
+	if [[ "$DRY_RUN" == "true" ]]; then
+		echo -e "${YELLOW}[DRY RUN] Would execute jq to update package.json${NC}"
+	else
+		jq --tab \
+		   --arg name "$PACKAGE_NAME" \
+		   --arg desc "$PACKAGE_DESCRIPTION" \
+		   --arg author "$AUTHOR_NAME" \
+		   --argjson keywords "$KEYWORDS_JSON" \
+		   --argjson repository "$repo_obj" \
+		   '.name = $name | (if $desc != "" then .description = $desc else . end) | .author = $author | .keywords = $keywords | if $repository != null then .repository = $repository else . end' \
+		   package.json > package.json.tmp && mv package.json.tmp package.json
+	fi
 }
 
 # Update package.json using sed
@@ -242,25 +245,41 @@ update_license_file() {
 	if [[ -f "LICENSE.md" ]]; then
 		echo -e "${BLUE}Updating LICENSE.md file...${NC}"
 		CURRENT_YEAR=$(date +%Y)
-		if ! execute_command "sed -i \"s/Copyright (c) [0-9]\\{4\\} .*/Copyright (c) $CURRENT_YEAR $LICENSE_HOLDER/\" LICENSE.md"; then
-			echo -e "${RED}✗ Error updating copyright in LICENSE.md${NC}"
-			exit 1
+		if [[ "$DRY_RUN" == "true" ]]; then
+			echo -e "${YELLOW}[DRY RUN] Would execute: sed -i \"s/Copyright (c) [0-9]\\{4\\} .*/Copyright (c) $CURRENT_YEAR $LICENSE_HOLDER/\" LICENSE.md${NC}"
+		else
+			if ! sed -i "s/Copyright (c) [0-9]\\{4\\} .*/Copyright (c) $CURRENT_YEAR $LICENSE_HOLDER/" LICENSE.md; then
+				echo -e "${RED}✗ Error updating copyright in LICENSE.md${NC}"
+				exit 1
+			fi
 		fi
-		if ! execute_command "sed -i \"s/\\[Project Name\\]/$PACKAGE_NAME/g\" LICENSE.md"; then
-			echo -e "${RED}✗ Error updating project name in LICENSE.md${NC}"
-			exit 1
+		if [[ "$DRY_RUN" == "true" ]]; then
+			echo -e "${YELLOW}[DRY RUN] Would execute: sed -i \"s|\\[Project Name\\]|$PACKAGE_NAME|g\" LICENSE.md${NC}"
+		else
+			if ! sed -i "s|\\[Project Name\\]|$PACKAGE_NAME|g" LICENSE.md; then
+				echo -e "${RED}✗ Error updating project name in LICENSE.md${NC}"
+				exit 1
+			fi
 		fi
 		echo -e "${GREEN}✓ LICENSE.md updated successfully${NC}"
 	elif [[ -f "LICENSE" ]]; then
 		echo -e "${BLUE}Updating LICENSE file...${NC}"
 		CURRENT_YEAR=$(date +%Y)
-		if ! execute_command "sed -i \"s/Copyright (c) [0-9]\\{4\\} .*/Copyright (c) $CURRENT_YEAR $LICENSE_HOLDER/\" LICENSE"; then
-			echo -e "${RED}✗ Error updating copyright in LICENSE${NC}"
-			exit 1
+		if [[ "$DRY_RUN" == "true" ]]; then
+			echo -e "${YELLOW}[DRY RUN] Would execute: sed -i \"s/Copyright (c) [0-9]\\{4\\} .*/Copyright (c) $CURRENT_YEAR $LICENSE_HOLDER/\" LICENSE${NC}"
+		else
+			if ! sed -i "s/Copyright (c) [0-9]\\{4\\} .*/Copyright (c) $CURRENT_YEAR $LICENSE_HOLDER/" LICENSE; then
+				echo -e "${RED}✗ Error updating copyright in LICENSE${NC}"
+				exit 1
+			fi
 		fi
-		if ! execute_command "sed -i \"s/\\[Project Name\\]/$PACKAGE_NAME/g\" LICENSE"; then
-			echo -e "${RED}✗ Error updating project name in LICENSE${NC}"
-			exit 1
+		if [[ "$DRY_RUN" == "true" ]]; then
+			echo -e "${YELLOW}[DRY RUN] Would execute: sed -i \"s|\\[Project Name\\]|$PACKAGE_NAME|g\" LICENSE${NC}"
+		else
+			if ! sed -i "s|\\[Project Name\\]|$PACKAGE_NAME|g" LICENSE; then
+				echo -e "${RED}✗ Error updating project name in LICENSE${NC}"
+				exit 1
+			fi
 		fi
 		echo -e "${GREEN}✓ LICENSE updated successfully${NC}"
 	fi
@@ -300,9 +319,9 @@ update_readme() {
 			sed -i "s|https://github\.com/your-username/your-repo|$REPO_URL|g" README.md
 		fi
 		if [[ -n "$PACKAGE_NAME" ]]; then
-			sed -i "s/@your-scope\/your-package-name/$PACKAGE_NAME/g" README.md
-			sed -i "s/your-package-name/$PACKAGE_NAME/g" README.md
-			sed -i "s/template-package-npm/$PACKAGE_NAME/g" README.md
+			sed -i "s|@your-scope/your-package-name|$PACKAGE_NAME|g" README.md
+			sed -i "s|your-package-name|$PACKAGE_NAME|g" README.md
+			sed -i "s|template-package-npm|$PACKAGE_NAME|g" README.md
 		fi
 	fi
 }
