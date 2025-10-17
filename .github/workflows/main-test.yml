@@ -1,4 +1,4 @@
-name: main-ci
+name: main-test
 run-name: "[main-ci] Check \"${{ github.head_ref || github.ref_name }}\" by ${{ github.actor }}"
 
 on:
