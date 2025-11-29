@@ -1,4 +1,6 @@
 ---
+name: Development_Workflow_and_Code_Standards
+description: Guidelines for development workflow, code standards, contribution principles, and commit message conventions.
 applyTo: '**'
 ---
 ## Development Workflow
@@ -38,25 +40,19 @@ applyTo: '**'
 Format: <type>(<emoji>): [summary up to 72 chars]
 (blank line, then context or description)
 
+<type> is lowercase
+summary is surrounded by brackets `[summary]`
+
 Types:
-feat 🚀 – New features
-fix 🔧 – Bug fixes
-perf ⚡ – Performance improvements
-refactor 🧹 – Refactoring
-build 📦 – Build tools / dependency changes
-types 🌊 – Type definitions
-chore 🦉 – Maintenance, non-code/test changes
-examples 🏀 – Example updates
-docs 📖 – Documentation changes
-test 🧪 – Test code updates
-style 🎨 – Style/formatting only
-ci 🤖 – CI/CD configuration
-
-Example:
-feat(🚀): add advanced repository filtering operators
-
-Features:
-- Added $eq, $like, $between filtering operators to repository
-
-Description:
-Allows advanced querying and filtering of database records using the repository pattern.
+feat(🚀) – New features
+fix(🔧) – Bug fixes
+perf(⚡) – Performance improvements
+refactor(🧹) – Refactoring
+build(📦) – Build tools / dependency changes
+types(🌊) – Type definitions
+chore(🦉) – Maintenance, non-code/test changes
+examples(🏀) – Example updates
+docs(📖) – Documentation changes
+test(🧪) – Test code updates
+style(🎨) – Style/formatting only
+ci(🤖) – CI/CD configuration
