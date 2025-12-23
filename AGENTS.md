@@ -1,20 +1,8 @@
 ---
 name: Development_Workflow_and_Code_Standards
-description: Guidelines for development workflow, code standards, contribution principles, and commit message conventions.
+description: Guidelines for development workflow and code standards
 applyTo: '**'
 ---
-## Development Workflow
-- Build: bun run build
-- Test: bun run test, bun run test:unit, bun run test:integration
-- Lint: bun run lint (auto-fix: bun run fix-lint)
-- Docs: bun run docs
-
-## Code Standards and Guidelines
-
- ##Required Before Each Commit
-- Run bun run lint and fix all errors and warnings
-- Run relevant unit or integration tests
-- Update documentation if public APIs or complex logic change
 
 ## TypeScript and Project Conventions
 1. Use underscore prefix for private or non-exported elements (e.g., _privateMethod)
@@ -23,11 +11,9 @@ applyTo: '**'
 4. Explicit typing: Always specify types for variables, parameters, and return values; never use any; prefer unknown if type cannot be determined; prefer interface over type alias for extendable objects
 5. Documentation: Use TSDoc style; explain purpose, parameters, return values, and behavior; only document code when requested; for @throws, use format "@throws ({@link Type}) – description"; for object/interface properties, write comment above each property instead of @param
 6. Control structures: Omit curly braces for single-statement bodies
-7. Path Aliases: Use #/ for internal imports; do not import barrel files except as entry points
+7. Path Aliases: Use $ for internal imports; do not import barrel files except as entry points
 8. Export Pattern: Each directory has index.ts re-exporting public items; types exported in types/index.ts
-9. Testing: Write unit tests for new features; tests mirror source/ structure; use Bun's test runner; integration tests for DB/external systems; prefer table-driven tests
-10. Architecture: Maintain modular structure; use dependency injection when appropriate; document public APIs and complex logic
-11. Function style: Class methods use standard method syntax; helpers/callbacks/HOFs prefer arrow functions unless function syntax is required
+9. Function style: Class methods use standard method syntax; helpers/callbacks/HOFs prefer arrow functions unless function syntax is required
 
 ## Contribution Principles
 1. Follow TypeScript best practices and idiomatic patterns
