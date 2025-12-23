@@ -289,7 +289,15 @@ update_license_file() {
 update_code_of_conduct() {
 	if [[ -f "CODE_OF_CONDUCT.md" && -n "$CONTACT_EMAIL" ]]; then
 		echo -e "${BLUE}Updating CODE_OF_CONDUCT.md file...${NC}"
-		sed -i "s/\[conduct@example\.com\](mailto:conduct@example\.com)/[$CONTACT_EMAIL](mailto:$CONTACT_EMAIL)/g" CODE_OF_CONDUCT.md
+		if [[ "$DRY_RUN" == "true" ]]; then
+			echo -e "${YELLOW}[DRY RUN] Would update contact email in CODE_OF_CONDUCT.md${NC}"
+		else
+			if ! sed -i "s/\[conduct@example\.com\](mailto:conduct@example\.com)/[$CONTACT_EMAIL](mailto:$CONTACT_EMAIL)/g" CODE_OF_CONDUCT.md; then
+				echo -e "${RED}✗ Error updating CODE_OF_CONDUCT.md${NC}"
+				exit 1
+			fi
+			echo -e "${GREEN}✓ CODE_OF_CONDUCT.md updated successfully${NC}"
+		fi
 	fi
 }
 
@@ -297,12 +305,31 @@ update_code_of_conduct() {
 update_contributing() {
 	if [[ -f "CONTRIBUTING.md" ]]; then
 		echo -e "${BLUE}Updating CONTRIBUTING.md file...${NC}"
-		if [[ -n "$CONTACT_EMAIL" ]]; then
-			sed -i "s/komiriko@pm\.me/$CONTACT_EMAIL/g" CONTRIBUTING.md
-		fi
-		if [[ -n "$REPO_URL" ]]; then
-			sed -i "s|https://github\.com/Komiriko/template-package-npm|$REPO_URL|g" CONTRIBUTING.md
-			sed -i "s|https://github\.com/YOUR_USERNAME/template-package-npm|$REPO_URL|g" CONTRIBUTING.md
+		if [[ "$DRY_RUN" == "true" ]]; then
+			echo -e "${YELLOW}[DRY RUN] Would update title, email and repo URL in CONTRIBUTING.md${NC}"
+		else
+			# Update the title with the package name
+			if ! sed -i "s/# Contributing to Package Template/# Contributing to $PACKAGE_NAME/g" CONTRIBUTING.md; then
+				echo -e "${RED}✗ Error updating title in CONTRIBUTING.md${NC}"
+				exit 1
+			fi
+			if [[ -n "$CONTACT_EMAIL" ]]; then
+				if ! sed -i "s/komiriko@pm\.me/$CONTACT_EMAIL/g" CONTRIBUTING.md; then
+					echo -e "${RED}✗ Error updating email in CONTRIBUTING.md${NC}"
+					exit 1
+				fi
+			fi
+			if [[ -n "$REPO_URL" ]]; then
+				if ! sed -i "s|https://github\.com/Komiriko/template-package-npm|$REPO_URL|g" CONTRIBUTING.md; then
+					echo -e "${RED}✗ Error updating repo URL in CONTRIBUTING.md${NC}"
+					exit 1
+				fi
+				if ! sed -i "s|https://github\.com/YOUR_USERNAME/template-package-npm|$REPO_URL|g" CONTRIBUTING.md; then
+					echo -e "${RED}✗ Error updating repo URL in CONTRIBUTING.md${NC}"
+					exit 1
+				fi
+			fi
+			echo -e "${GREEN}✓ CONTRIBUTING.md updated successfully${NC}"
 		fi
 	fi
 }
@@ -311,17 +338,40 @@ update_contributing() {
 update_readme() {
 	if [[ -f "README.md" ]]; then
 		echo -e "${BLUE}Updating README.md file...${NC}"
-		if [[ -n "$CONTACT_EMAIL" ]]; then
-			sed -i "s/your-email@domain\.com/$CONTACT_EMAIL/g" README.md
-			sed -i "s/your_email@domain\.ext/$CONTACT_EMAIL/g" README.md
-		fi
-		if [[ -n "$REPO_URL" ]]; then
-			sed -i "s|https://github\.com/your-username/your-repo|$REPO_URL|g" README.md
-		fi
-		if [[ -n "$PACKAGE_NAME" ]]; then
-			sed -i "s|@your-scope/your-package-name|$PACKAGE_NAME|g" README.md
-			sed -i "s|your-package-name|$PACKAGE_NAME|g" README.md
-			sed -i "s|template-package-npm|$PACKAGE_NAME|g" README.md
+		if [[ "$DRY_RUN" == "true" ]]; then
+			echo -e "${YELLOW}[DRY RUN] Would update email, repo URL and package name in README.md${NC}"
+		else
+			if [[ -n "$CONTACT_EMAIL" ]]; then
+				if ! sed -i "s/your-email@domain\.com/$CONTACT_EMAIL/g" README.md; then
+					echo -e "${RED}✗ Error updating email in README.md${NC}"
+					exit 1
+				fi
+				if ! sed -i "s/your_email@domain\.ext/$CONTACT_EMAIL/g" README.md; then
+					echo -e "${RED}✗ Error updating email in README.md${NC}"
+					exit 1
+				fi
+			fi
+			if [[ -n "$REPO_URL" ]]; then
+				if ! sed -i "s|https://github\.com/your-username/your-repo|$REPO_URL|g" README.md; then
+					echo -e "${RED}✗ Error updating repo URL in README.md${NC}"
+					exit 1
+				fi
+			fi
+			if [[ -n "$PACKAGE_NAME" ]]; then
+				if ! sed -i "s|@your-scope/your-package-name|$PACKAGE_NAME|g" README.md; then
+					echo -e "${RED}✗ Error updating package name in README.md${NC}"
+					exit 1
+				fi
+				if ! sed -i "s|your-package-name|$PACKAGE_NAME|g" README.md; then
+					echo -e "${RED}✗ Error updating package name in README.md${NC}"
+					exit 1
+				fi
+				if ! sed -i "s|template-package-npm|$PACKAGE_NAME|g" README.md; then
+					echo -e "${RED}✗ Error updating package name in README.md${NC}"
+					exit 1
+				fi
+			fi
+			echo -e "${GREEN}✓ README.md updated successfully${NC}"
 		fi
 	fi
 }
@@ -330,7 +380,15 @@ update_readme() {
 update_github_config() {
 	if [[ -f ".github/ISSUE_TEMPLATE/config.yml" && -n "$CONTACT_EMAIL" ]]; then
 		echo -e "${BLUE}Updating GitHub issue template config...${NC}"
-		sed -i "s/komiriko@pm\.me/$CONTACT_EMAIL/g" .github/ISSUE_TEMPLATE/config.yml
+		if [[ "$DRY_RUN" == "true" ]]; then
+			echo -e "${YELLOW}[DRY RUN] Would update contact email in .github/ISSUE_TEMPLATE/config.yml${NC}"
+		else
+			if ! sed -i "s/komiriko@pm\.me/$CONTACT_EMAIL/g" .github/ISSUE_TEMPLATE/config.yml; then
+				echo -e "${RED}✗ Error updating GitHub issue template config${NC}"
+				exit 1
+			fi
+			echo -e "${GREEN}✓ GitHub issue template config updated successfully${NC}"
+		fi
 	fi
 }
 
@@ -338,11 +396,22 @@ update_github_config() {
 update_security() {
 	if [[ -f "SECURITY.md" ]]; then
 		echo -e "${BLUE}Updating SECURITY.md file...${NC}"
-		if [[ -n "$CONTACT_EMAIL" ]]; then
-			sed -i "s/your-email@domain\.com/$CONTACT_EMAIL/g" SECURITY.md
-		fi
-		if [[ -n "$REPO_URL" ]]; then
-			sed -i "s|https://github\.com/your-username/your-repo|$REPO_URL|g" SECURITY.md
+		if [[ "$DRY_RUN" == "true" ]]; then
+			echo -e "${YELLOW}[DRY RUN] Would update email and repo URL in SECURITY.md${NC}"
+		else
+			if [[ -n "$CONTACT_EMAIL" ]]; then
+				if ! sed -i "s/your-email@domain\.com/$CONTACT_EMAIL/g" SECURITY.md; then
+					echo -e "${RED}✗ Error updating email in SECURITY.md${NC}"
+					exit 1
+				fi
+			fi
+			if [[ -n "$REPO_URL" ]]; then
+				if ! sed -i "s|https://github\.com/your-username/your-repo|$REPO_URL|g" SECURITY.md; then
+					echo -e "${RED}✗ Error updating repo URL in SECURITY.md${NC}"
+					exit 1
+				fi
+			fi
+			echo -e "${GREEN}✓ SECURITY.md updated successfully${NC}"
 		fi
 	fi
 }
