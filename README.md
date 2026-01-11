@@ -67,7 +67,18 @@ Add the following environment variables to your repository settings:
 - `KEY_SSH`: The private SSH key for accessing the repository. (Generated in step [1.1.1](#111-ssh))
 - `KEY_GPG`: The GPG private key for signing commits and tags for git (Generated in step [1.1.2](#112-gpg))
 - `GIT_EMAIL`: Your email address associated with the GPG key.
-- `NPM_TOKEN`: Your npm token for publishing packages.
+
+### 1.4 Configure Trusted Publisher on npm
+
+1. Go to [npmjs.com](https://www.npmjs.com) and log in
+2. Navigate to your package (or create it first with `npm publish --access public`)
+3. Go to **Settings** → **Trusted publishers**
+4. Click **Add Trusted Publisher** and configure:
+   - **Repository owner**: Your GitHub username or org
+   - **Repository name**: Your repo name
+   - **Workflow filename**: `main-deploy.yml`
+
+See [npm Trusted Publishers documentation](https://docs.npmjs.com/trusted-publishers) for more details.
 
 ## 2 Configure your repository
 - Add Ruleset for `main` and `develop` branches.
